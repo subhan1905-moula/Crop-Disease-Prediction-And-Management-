@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="Agro Harvest, Crop Prediction, Fertilizer Recommendation, Smart Farming, AI Agriculture" />
+    <meta name="description" content="PerfectCrop - AI-powered crop and fertilizer recommendation platform for farmers.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #c0ccdd;
+            color: #8a8686;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .chat-header {
+            background: #8eb743;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .chat-body {
+            height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .chat-input button {
+            margin-left: 5px;
+            background: #8eb743;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #8eb743;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #8eb743;">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="PerfectCrop Logo" style="width: 150px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('fertilizer_recommendation') }}">Fertilizer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('disease_prediction') }}">Disease</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <main class="container my-5">
+        {% block body %} {% endblock %}
+    </main>
+
+    <!-- Chatbot -->
+    <div class="chat-toggle" onclick="toggleChat()">
+        <i class="fas fa-comment"></i>
+    </div>
+
+    <div class="chatbot-container" id="chatbot">
+        <div class="chat-header">AI Farming Assistant</div>
+        <div class="chat-body" id="chat-body"></div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Ask me anything...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-4" style="background: #8db613; color: white;">
+        <a href="{{ url_for('home') }}">
+        <h2 style="background: #8db613; color: white;">PerfectCrop</h2>
+    </a>
+        <p>&copy; 2025 PerfectCrop. Helping farmers with AI-driven recommendations.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function toggleChat() {
+            let chatbot = document.getElementById("chatbot");
+            chatbot.style.display = chatbot.style.display === "block" ? "none" : "block";
+        }
+
+        function sendMessage() {
+            let input = document.getElementById("chat-input").value;
+            let chatBody = document.getElementById("chat-body");
+            if (input.trim() === "") return;
+
+            chatBody.innerHTML += `<div><strong>You:</strong> ${input}</div>`;
+            document.getElementById("chat-input").value = "";
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            fetch("/chatbot", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: input })
+            })
+            .then(response => response.json())
+            .then(data => {
+                chatBody.innerHTML += `<div><strong>Bot:</strong> ${data.response}</div>`;
+                chatBody.scrollTop = chatBody.scrollHeight;
+            });
+        }
+    </script>
+</body>
+</html>

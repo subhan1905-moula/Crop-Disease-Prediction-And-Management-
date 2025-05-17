@@ -1,0 +1,142 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<!-- Hero Section -->
+<section class="banner" id="home">
+    <div class="csslider infinity" id="slider1">
+        <div class="banner-top">
+            <div class="overlay">
+                <div class="container">
+                    <div class="banner-content text-center">
+                        <h1 style="color: white">🌱 PerfectCrop: Smart Farming, Made Simple</h1>
+                        <p  style="color: aliceblue;">Harness the power of AI and data-driven insights to maximize your crop yield and improve farm sustainability.</p>
+
+                        <!-- What We Offer Section -->
+                        <div class="container mt-5">
+                            <h3 class="text-light">🔍 What We Offer:</h3>
+                            <div class="row">
+                                <div class="col-md-4 text-center">
+                                    <div class="p-4 border rounded shadow-lg bg-dark text-light">
+                                        <h4 style="color: white">🌾 Smart Crop Selection</h4>
+                                        <p>Discover the best crops for your soil type and climate with our AI-based recommendations.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <div class="p-4 border rounded shadow-lg bg-dark text-light">
+                                        <h4 style="color: white">🧪 Precision Fertilization</h4>
+                                        <p>Get the best fertilizer recommendations tailored to your soil health.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <div class="p-4 border rounded shadow-lg bg-dark text-light">
+                                        <h4 style="color: white">🦠 Disease Detection</h4>
+                                        <p>Identify plant diseases early and receive expert-backed treatment solutions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- How It Works Section -->
+                        <div class="container mt-5">
+                            <h3 class="text-light">🔬 How It Works:</h3>
+                            <div class="row">
+                                <div class="col-md-4 text-center">
+                                    <div class="p-4 border rounded shadow-lg bg-secondary text-white">
+                                        <h5>1️⃣ Upload Data</h5>
+                                        <p style="color: white">Enter soil, weather, and crop details into our system.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <div class="p-4 border rounded shadow-lg bg-secondary text-white">
+                                        <h5>2️⃣ AI Analysis</h5>
+                                        <p style="color: white">Our AI scans through millions of data points to provide the best recommendations.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <div class="p-4 border rounded shadow-lg bg-secondary text-white">
+                                        <h5>3️⃣ Get Actionable Insights</h5>
+                                        <p style="color: white">Receive clear, easy-to-follow advice for better farming.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Why Choose Us Section -->
+                        <div class="container mt-5">
+                            <h3 class="text-light">🌟 Why Choose PerfectCrop?</h3>
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 p-4 border rounded shadow-lg bg-success text-white">
+                                    <p>🌍 <strong>Eco-friendly & Sustainable</strong> – Reduce chemical usage and enhance soil health.</p>
+                                    <p>🚀 <strong>AI-Powered Precision</strong> – Make data-driven decisions for maximum yield.</p>
+                                    <p>💡 <strong>Trusted by Experts</strong> – Built with agricultural scientists & farmers.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Call to Action Button -->
+                        <div class="container mt-4">
+                            <a href="{{ url_for('disease_prediction') }}" class="btn btn-warning btn-lg font-weight-bold">🌾 Start Your Journey</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- About Us Section -->
+<section class="about py-5">
+    <div class="container">
+        <h2 class="section-title text-center">About Us</h2>
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <img src="{{ url_for('static', filename='images/core.jpg') }}" class="img-fluid" alt="About Us">
+            </div>
+            <div class="col-lg-6">
+                <p class="lead">At PerfectCrop, we are dedicated to enhancing agricultural productivity through innovative solutions. Our mission is to integrate advanced technology with farming practices to ensure sustainable and efficient crop management.</p>
+                <h4>Our Solutions:</h4>
+                <ul>
+                    <li><strong>Data-Driven Insights:</strong> Real-time analytics for soil health, weather patterns, and crop conditions.</li>
+                    <li><strong>Sustainable Farming:</strong> Eco-friendly practices that reduce chemical dependency.</li>
+                    <li><strong>Community Support:</strong> A platform for farmers to share experiences and access expert advice.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="services py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title text-center">Our Services</h2>
+        <div class="container my-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100 shadow">
+                        <img src="{{ url_for('static', filename='images/s2.jpg') }}" class="card-img-top" alt="Fertilizer Recommendation">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Fertilizer Guidance</h4>
+                            <p class="card-text">Get recommendations on the best fertilizers for your soil and crops.</p>
+                            <a href="{{ url_for('fertilizer_recommendation') }}" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100 shadow">
+                        <img src="{{ url_for('static', filename='images/s4.jpg') }}" class="card-img-top" alt="Crop Disease Prediction">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Crop Disease Diagnosis</h4>
+                            <p class="card-text">Identify and treat crop diseases effectively.</p>
+                            <a href="{{ url_for('disease_prediction') }}" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+{% endblock %}
